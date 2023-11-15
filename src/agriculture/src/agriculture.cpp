@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <stack>
 
 
 double AgriculturalProduct::calculate_sales_increase() const {
@@ -107,23 +108,33 @@ void AgricultureMarket::list_market_information() const {
     std::cout << "Enter the product name to list market information: ";
     std::string product_name;
     std::cin >> product_name;
+    std::stack<AgriculturalProduct> productStack;
 
     for (const auto& product : products) {
         if (product.name == product_name) {
-            std::cout << "Market information for " << product.name << ":\n";
-            std::cout << "Previous Price: " << product.previous_price << "\n";
-            std::cout << "Previous Sales: " << product.previous_sales << "\n";
-            std::cout << "Updated Price: " << product.updated_price << "\n";
-            std::cout << "Updated Sales: " << product.updated_sales << "\n";
-            std::cout << "Sales Increase: " << product.calculate_sales_increase() << "%\n";
-            std::cout << "Seasonal: " << (product.is_seasonal ? "Yes" : "No") << "\n";
-            std::cout << "Organic: " << (product.is_organic ? "Yes" : "No") << "\n";
-            std::cout << "GMO: " << (product.has_gmo ? "Yes" : "No") << "\n";
-            return;
+            productStack.push(product);
         }
     }
 
-    std::cout << "Product not found.\n";
+    if (!productStack.empty()) {
+        AgriculturalProduct product = productStack.top();
+        productStack.pop();
+
+        std::cout << "Market information for " << product.name << ":\n";
+        std::cout << "Previous Price: " << product.previous_price << "\n";
+        std::cout << "Previous Sales: " << product.previous_sales << "\n";
+        std::cout << "Updated Price: " << product.updated_price << "\n";
+        std::cout << "Updated Sales: " << product.updated_sales << "\n";
+        std::cout << "Sales Increase: " << product.calculate_sales_increase() << "%\n";
+        std::cout << "Seasonal: " << (product.is_seasonal ? "Yes" : "No") << "\n";
+        std::cout << "Organic: " << (product.is_organic ? "Yes" : "No") << "\n";
+        std::cout << "GMO: " << (product.has_gmo ? "Yes" : "No") << "\n";
+        return;
+    }
+    else {
+        std::cout << "Product not found.\n";
+        return;
+    }
 }
 
 void AgricultureMarket::list_products() const {
