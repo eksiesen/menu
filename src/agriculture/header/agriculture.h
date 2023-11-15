@@ -1,62 +1,50 @@
-/**
- * @file calculator.h
- * 
- * @brief Provides functions for math. utilities
- */
+#pragma once
 
-#ifndef CALCULATOR_H
-#define CALCULATOR_H
+#include <iostream>
+#include <vector>
+#include <algorithm>
 
-#include "../../utility/header/commonTypes.h"
+class AgriculturalProduct {
+public:
+    std::string name;
+    double previous_price;
+    int previous_sales;
+    double updated_price;
+    int updated_sales;
+    bool is_seasonal;
+    bool is_organic;
+    bool has_gmo;
 
-namespace Coruh
-{
-    namespace Calculator
-    {
-        /**
-            @class Calculator
-            @brief Provides Basic functions for various operations.
-        */
-        class Calculator
-        {
-        public:
-            /**
-             * Adds two numbers.
-             * @param a First operand.
-             * @param b Second operand.
-             * @return The sum of a and b.
-             */
-            static double add(double a, double b);
+    double calculate_sales_increase() const;
+};
 
-            /**
-             * Subtracts the second number from the first.
-             * @param a Minuend.
-             * @param b Subtrahend.
-             * @return The result of a - b.
-             */
-            static double subtract(double a, double b);
+class SupplierCustomerManagement {
+public:
+    std::string name;
+    int reliability_score;
+    std::string feedback;
+    std::string contract;
 
-            /**
-             * Multiplies two numbers.
-             * @param a First operand.
-             * @param b Second operand.
-             * @return The product of a and b.
-             */
-            static double multiply(double a, double b);
+    SupplierCustomerManagement();
+    SupplierCustomerManagement(const std::string& n, int score, const std::string& fb, const std::string& ct);
+};
 
-            /**
-             * Divides the first number by the second.
-             * Throws std::invalid_argument if the second number is zero.
-             * @param a Dividend.
-             * @param b Divisor.
-             * @return The result of a / b.
-             * @throws std::invalid_argument If b is zero.
-             */
-            static double divide(double a, double b);
+class AgricultureMarket {
+private:
+    std::vector<AgriculturalProduct> products;
+    std::vector<SupplierCustomerManagement> suppliers_customers;
 
+public:
+    void add_product_and_market_information();
+    void update_product();
+    void delete_product();
+    void list_market_information() const;
+    void list_products() const;
+    void add_supplier_customer();
+    void list_suppliers_customers() const;
+    void list_sales_information() const;
+    void list_menu();
+};
 
-        };
-    }
-}
-
-#endif // CALCULATOR_H
+// Declaration of the function defined in agriculture.cpp
+extern double calculate_sales_increase(const AgriculturalProduct& product);
