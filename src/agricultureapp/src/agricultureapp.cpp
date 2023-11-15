@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 
+// The AgriculturalProduct class represents agricultural products.
 class AgriculturalProduct {
 public:
     std::string name;
@@ -13,11 +14,13 @@ public:
     bool is_organic;
     bool has_gmo;
 
+    // Function to calculate the sales increase.
     double calculate_sales_increase() const {
         return ((updated_sales - previous_sales) / static_cast<double>(previous_sales)) * 100;
     }
 };
 
+//  The SupplierCustomerManagement class represents supplier and customer information.
 class SupplierCustomerManagement {
 public:
     std::string name;
@@ -25,18 +28,22 @@ public:
     std::string feedback;
     std::string contract;
 
+    // Default constructor sets reliability_score to zero.
     SupplierCustomerManagement() : reliability_score(0) {}
 
+    // Parameterized constructor creates an object with specified initial values.
     SupplierCustomerManagement(const std::string& n, int score, const std::string& fb, const std::string& ct)
         : name(n), reliability_score(score), feedback(fb), contract(ct) {}
 };
 
+// The AgricultureMarket class includes management of agricultural products and supplier/customer information.
 class AgricultureMarket {
 private:
     std::vector<AgriculturalProduct> products;
     std::vector<SupplierCustomerManagement> suppliers_customers;
 
 public:
+    // Function to add agricultural product and market information.
     void add_product_and_market_information() {
         AgriculturalProduct product;
         std::cout << "Enter product name: ";
@@ -60,6 +67,7 @@ public:
         std::cout << "Product and market information added successfully.\n";
     }
 
+    // Function to update information about a product.
     void update_product() {
         std::cout << "Enter the product name to update information: ";
         std::string product_name;
@@ -86,6 +94,7 @@ public:
         std::cout << "Product not found.\n";
     }
 
+    // Function to delete a product.
     void delete_product() {
         std::cout << "Enter the product name to delete: ";
         std::string product_name;
@@ -105,7 +114,7 @@ public:
         }
     }
 
- 
+    // Function to list all products.
     void list_products() const {
         std::cout << "List of Products:\n";
         for (const auto& product : products) {
@@ -121,6 +130,7 @@ public:
         }
     }
 
+    // Function to add a supplier or customer.
     void add_supplier_customer() {
         SupplierCustomerManagement scm;
         std::cout << "Enter name: ";
@@ -136,6 +146,7 @@ public:
         std::cout << "Supplier/Customer added successfully.\n";
     }
 
+    // Function to list all suppliers and customers.
     void list_suppliers_customers() const {
         std::cout << "List of Suppliers/Customers:\n";
         for (const auto& scm : suppliers_customers) {
@@ -145,7 +156,7 @@ public:
             std::cout << "Contract: " << scm.contract << "\n\n";
         }
     }
-
+    // Function to list sales information for a specific product.
     void list_sales_information() const {
         std::cout << "Enter the product name to list sales information: ";
         std::string product_name;
@@ -169,10 +180,10 @@ public:
         std::cout << "Product not found.\n";
     }
 
+    // Function to display the main menu and handle user input.
     void list_menu() {
         while (true) {
 
-            system("cls");
 
             std::cout << "****************************************************\n";
             std::cout << "* Agriculture and Agricultural Products Market Menu *\n";
@@ -224,6 +235,7 @@ public:
     }
 };
 
+// Main program
 int main() {
     AgricultureMarket market;
     market.list_menu();
