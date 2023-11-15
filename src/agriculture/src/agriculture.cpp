@@ -169,46 +169,42 @@ void AgricultureMarket::list_sales_information() const {
 void AgricultureMarket::list_menu() {
     while (true) {
         std::cout << "\nAgriculture and Agricultural Products Market Menu:\n";
-        std::cout << "1. Add Product And Market Information\n";
-        std::cout << "2. Update Product\n";
-        std::cout << "3. Delete Product\n";
-        std::cout << "4. List Products\n";
-        std::cout << "5. List Sales Information\n";
-        std::cout << "6. List Market Information\n";
-        std::cout << "7. Add Supplier or Customer\n";
-        std::cout << "8. List Suppliers/Customers\n";
-        std::cout << "9. Exit\n";
+        std::cout << "1. Add Supplier or Customer\n";
+        std::cout << "2. Add Product\n";
+        std::cout << "3. Update Product\n";
+        std::cout << "4. Delete Products\n";
+        std::cout << "5. List Products\n";
+        std::cout << "6. Price and Demand Information\n";
+        std::cout << "7. Suppliers and Customer Management\n";
+        std::cout << "8. Exit\n";
 
         int choice;
-        std::cout << "Enter your choice (1-9): ";
+        std::cout << "Enter your choice (1-8): ";
         std::cin >> choice;
 
         switch (choice) {
         case 1:
-            add_product_and_market_information();
-            break;
-        case 2:
-            update_product();
-            break;
-        case 3:
-            delete_product();
-            break;
-        case 4:
-            list_products();
-            break;
-        case 5:
-            list_sales_information();
-            break;
-        case 6:
-            list_market_information();
-            break;
-        case 7:
             add_supplier_customer();
             break;
-        case 8:
+        case 2:
+            add_product_and_market_information();
+            break;
+        case 3:
+            update_product();
+            break;
+        case 4:
+            delete_product();
+            break;
+        case 5:
+            list_products();
+            break;
+        case 6:
+            list_sales_information();
+            break;
+        case 7:
             list_suppliers_customers();
             break;
-        case 9:
+        case 8:
             std::cout << "Exiting program.\n";
             return;
         default:
