@@ -1,4 +1,9 @@
 #include "../header/agriculture.h"
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+
 
 double AgriculturalProduct::calculate_sales_increase() const {
     return ((updated_sales - previous_sales) / static_cast<double>(previous_sales)) * 100;
@@ -33,7 +38,25 @@ void AgricultureMarket::add_product_and_market_information() {
 
     products.push_back(product);
     std::cout << "Product and market information added successfully.\n";
+
+    // Dosyaya yazma iþlemi
+    std::ofstream file("agriculture.txt", std::ios::app);
+    if (file.is_open()) {
+        file << "Product Name: " << product.name << "\n";
+        file << "Previous Price: " << product.previous_price << "\n";
+        file << "Previous Sales: " << product.previous_sales << "\n";
+        file << "Updated Price: " << product.updated_price << "\n";
+        file << "Updated Sales: " << product.updated_sales << "\n";
+        file << "Is Seasonal: " << product.is_seasonal << "\n";
+        file << "Is Organic: " << product.is_organic << "\n";
+        file << "Has GMO: " << product.has_gmo << "\n\n";
+        file.close();
+    }
+    else {
+        std::cerr << "Unable to open file for writing.\n";
+    }
 }
+
 
 void AgricultureMarket::update_product() {
     std::cout << "Enter the product name to update information: ";
@@ -105,6 +128,19 @@ void AgricultureMarket::list_market_information() const {
 
 void AgricultureMarket::list_products() const {
     std::cout << "List of Products:\n";
+    // Dosyadan okuma iþlemi
+    std::ifstream file("agriculture.txt");
+    if (file.is_open()) {
+        std::string line;
+        while (std::getline(file, line)) {
+            std::cout << line << "\n";
+        }
+        file.close();
+    }
+    else {
+        std::cerr << "Unable to open file for reading.\n";
+    }
+
     for (const auto& product : products) {
         std::cout << "Product Name: " << product.name << "\n";
         std::cout << "Previous Price: " << product.previous_price << "\n";
